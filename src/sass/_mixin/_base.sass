@@ -1,0 +1,45 @@
+=b
+  &:before
+    @content
+=a
+  &:after
+    @content
+
+=ba
+  &:before,
+  &:after
+    @content
+
+=baInit($w:100%, $h:100%, $pos:absolute)
+  +rect($w,$h)
+  content: ''
+  position: $pos
+
+=first
+  &:first-of-type
+    @content
+
+=last
+  &:last-of-type
+    @content
+
+=even()
+  &:nth-of-type(even)
+    @content
+
+=odd()
+  &:nth-of-type(odd)
+    @content
+
+=nth($n)
+  &:nth-of-type(#{$n})
+    @content
+
+=last-nth($n)
+  &:nth-of-type(#{$n})
+    @content
+
+=hover
+  +min-screen($mobile-l + 1)
+    &:hover
+      @content

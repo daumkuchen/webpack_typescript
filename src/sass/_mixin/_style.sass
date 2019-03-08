@@ -1,0 +1,184 @@
+=placeHolderColor($color)
+    &::-webkit-input-placeholder
+        color: $color
+    &::-moz-placeholder
+        color: $color
+    &:-ms-input-placeholder
+        color: $color
+
+=clearFix()
+    &:before,
+    &:after
+        display: table
+        content: ''
+        line-height: 0
+    &:after
+        clear: both
+
+=fillBlock
+    display: block
+    width: 100%
+    height: 100%
+
+=absFill($pos: absolute)
+    +fillBlock
+    position: $pos
+    top: 0
+    left: 0
+
+=smooth
+    text-rendering: optimizeLegibility
+    -webkit-font-smoothing: antialiased
+    -webkit-backface-visibility: hidden
+    backface-visibility: hidden
+
+// =rect($w,$h,$type:block)
+//     display: $type
+//     width: $w
+//     height: $h
+
+// =img($dire: true)
+//     img
+//         @if($dire)
+//             width: 100%
+//             height: auto
+//         @else
+//             width: auto
+//             height: 100%
+
+//         @content
+
+// ===================================
+
+=contents-width
+    max-width: 1300px
+    width: 100%
+    margin: 0 auto
+    padding: 0 50px
+    +max-screen($mobile-l)
+        padding: 0 30px
+    @content
+
+=font-size($size: 16)
+    font-size: $size + px
+    font-size: ($size / 16) + rem
+
+=reset-text-style
+    font-size: 0
+    line-height: 0
+    letter-spacing: 0
+
+=reset-input-style
+    border: 0
+    box-shadow: none
+    outline: none
+    appearance: none
+
+// ===================================
+// =bars($w: 16px, $h: 1px, $color: #fff)
+//     .bars
+//         span,
+//         &:before,
+//         &:after
+//             +baInit($w, $h)
+//             top: 50%
+//             left: 50%
+//             margin:
+//                 top: $h * -0.5
+//                 left: $w * -0.5
+
+//             background-color: $color
+//             transition: opacity .4s, transform .4s
+
+//         +b
+//             transform: translateY(-6px)
+//         +a
+//             transform: translateY( 6px)
+
+//         @content
+
+// =bars-close($w: 16px, $h: 1px, $color: #fff)
+//     .bars
+//         +ba
+//             +baInit($w, $h)
+//             top: 50%
+//             left: 50%
+//             margin:
+//                 top: $h * -0.5
+//                 left: $w * -0.5
+
+//             background-color: $color
+
+//         +b
+//             transform: rotate( 45deg)
+//         +a
+//             transform: rotate(-45deg)
+
+//         span
+//             opacity: 0
+
+//         @content
+
+=rect($w: 100%, $h: 100%, $background-color: #1a1a1a)
+    content: ""
+    display: block
+    position: absolute
+    z-index: 2
+    top: 0
+    left: 0
+    width: $w
+    height: $h
+    background-color: $background-color
+    @content
+
+=vec-right($w: 8px, $border-width: 2px, $border-color: #fff)
+    content: ""
+    display: block
+    position: absolute
+    z-index: 2
+    top: 50%
+    left: 50%
+    width: $w
+    height: $w
+    margin:
+        top: $w * -0.5
+        left: $w * -0.5
+    border: solid
+    border-width: $border-width $border-width 0 0
+    border-color: $border-color
+    transform: rotate(45deg)
+    pointer-events: none
+    +max-screen($mobile-m)
+        width: $w * .75
+        height: $w * .75
+        margin:
+            top: $w * .75 * -0.5
+            left: $w * .75 * -0.5
+        border-width: 1px 1px 0 0
+    @content
+
+=vec-left($w: 8px, $border-w: 2px, $border-color: #fff)
+    content: ""
+    display: block
+    position: absolute
+    z-index: 2
+    top: 50%
+    left: 50%
+    width: $w
+    height: $w
+    margin:
+        top: $w * -0.5
+        left: $w * -0.5
+    border: solid
+    border-width: $border-w $border-w 0 0
+    border-color: $border-color
+    transform: rotate(-135deg)
+    pointer-events: none
+    +max-screen($mobile-m)
+        width: $w * .75
+        height: $w * .75
+        margin:
+            top: $w * .75 * -0.5
+            left: $w * .75 * -0.5
+        border-width: 1px 1px 0 0
+    @content
