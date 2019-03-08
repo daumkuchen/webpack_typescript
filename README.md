@@ -1,4 +1,4 @@
-# webpack_template
+# webpack_typescript
 
 $ npm i  
 $ npm run watch
@@ -6,17 +6,8 @@ $ npm run watch
 ***
 
 ## package
-* pug or php
+* pug
 * sass(postcss)
 * typescript
-* gsap
-* three.js
 * browser-sync
-* stats
-* dat.gui
-* OrbitControls
-
-### deprecation
-* jquery
-
-
+<!-- * gsap -->
