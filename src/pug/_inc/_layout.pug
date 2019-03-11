@@ -1,11 +1,16 @@
 block var
 
+include _mixin.pug
+
 doctype html
 html(lang='ja')
 
-    include _head
+    head
+        include _head
+        include _analytics.pug
     
     body
+        include _noscript.pug
 
         #wrap
 
@@ -14,7 +19,7 @@ html(lang='ja')
 
             main#page
                 #contents
-                    .page-content(id=bodyID)
+                    .page-content(id=pageID)
                         block main
 
             include _footer.pug

@@ -1,39 +1,32 @@
 -
-    var thisPageTitle = title
-    //- if pageTitle!==""
-    //-     var thisPageTitle = pageTitle + ' | ' + title
+    var _pageTitle = isRoot ? title : pageTitle + ' | ' + title
 
-head
-    meta(charset="utf-8")
-    meta(http-equiv="X-UA-Compatible", content= "IE=Edge")
-    meta(name="viewport", content= "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no, viewport-fit=cover")
-    meta(name="description", content= description)
-    meta(name="keywords", content= keywords)
-    meta(name="format-detection", content= "telephone=no")
-    title= thisPageTitle
-    link(rel="apple-touch-icon", sizes="180x180", href="/assets/img/favicon/apple-touch-icon.png")
-    link(rel="icon", type="image/png", sizes="32x32", href="/assets/img/favicon/favicon-32x32.png")
-    link(rel="icon", type="image/png", sizes="16x16", href="/assets/img/favicon/favicon-16x16.png")
-    link(rel="manifest", href="/assets/img/favicon/site.webmanifest")
-    link(rel="mask-icon", href="/assets/img/favicon/safari-pinned-tab.svg" color="#1a1a1a")
-    link(rel="canonical", href=absolute)
-    meta(name="theme-color", content= "#1a1a1a")
-    meta(name="msapplication-TileColor", content="#ffffff")
-    meta(name="twitter:card", content= "summary_large_image")
-    meta(name="twitter:thisPageTitle", content= thisPageTitle)
-    meta(name="twitter:description", content= description)
-    meta(name="twitter:url", content= absolute)
-    meta(name="twitter:image", content= absolute + "/assets/img/common/og.png")
-    meta(property="og:thisPageTitle", content= thisPageTitle)
-    meta(property="og:description", content= description)
-    meta(property="og:url", content= absolute)
-    meta(property="og:image", content= absolute + "/assets/img/common/og.png")
-    meta(property="og:locale", content= "ja_JP")
-    meta(property="og:type", content= "website")
-    meta(property="og:site_name", content= thisPageTitle)
-    link(rel="stylesheet", href="/assets/css/bundle.css")
-    link(rel="stylesheet", href="/assets/css/prefix.css")
-    //-   include _analytics.pug
-    
-noscript
-    #noscript_message Your browser either doesn't support Javascript or you have it turned off. Please enable JavaScript to view this content.
+meta(charset="utf-8")
+meta(http-equiv="X-UA-Compatible", content= "IE=Edge")
+meta(name="viewport", content= "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no, viewport-fit=cover")
+meta(name="description", content= description)
+meta(name="keywords", content= keywords)
+meta(name="format-detection", content= "telephone=no")
+title= _pageTitle
+link(rel="apple-touch-icon", sizes="180x180", href=$path+"img/favicon/apple-touch-icon.png")
+link(rel="icon", type="image/png", sizes="32x32", href=$path+"img/favicon/favicon-32x32.png")
+link(rel="icon", type="image/png", sizes="16x16", href=$path+"img/favicon/favicon-16x16.png")
+link(rel="manifest", href=$path+"img/favicon/site.webmanifest")
+link(rel="mask-icon", href=$path+"img/favicon/safari-pinned-tab.svg" color="#1a1a1a")
+link(rel="canonical", href=absolute)
+meta(name="theme-color", content= "#1a1a1a")
+meta(name="msapplication-TileColor", content="#ffffff")
+meta(name="twitter:card", content= "summary_large_image")
+meta(name="twitter:title", content= _pageTitle)
+meta(name="twitter:description", content= description)
+meta(name="twitter:url", content= absolute)
+meta(name="twitter:image", content= absolute + $path+"img/common/og.png")
+meta(property="og:title", content= _pageTitle)
+meta(property="og:description", content= description)
+meta(property="og:url", content= absolute)
+meta(property="og:image", content= absolute + $path+"img/common/og.png")
+meta(property="og:locale", content= "ja_JP")
+meta(property="og:type", content= "website")
+meta(property="og:site_name", content= _pageTitle)
+link(rel="stylesheet", href=$path+"css/bundle.css")
+link(rel="stylesheet", href=$path+"css/prefix.css")
