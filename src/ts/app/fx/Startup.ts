@@ -12,7 +12,7 @@ export default class Startup {
         let dl = null;
 
         return () => {
-            
+
             const schedule = new Schedule();
             const PROCESS_TIME: number = 0;
 
@@ -20,7 +20,7 @@ export default class Startup {
             let id: string = content.getAttribute('id');
 
             schedule.add(resolve => {
-            
+                
                 controllerManager.add(id, content);
                 Schedule.wait(PROCESS_TIME).then(resolve);
 
@@ -53,7 +53,7 @@ export default class Startup {
                 
             });
 
-            schedule.done(function(){
+            schedule.done(() => {
 
                 nextTask(dl)
 

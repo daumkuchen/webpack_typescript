@@ -1,42 +1,24 @@
 import Color from './Color';
-import CustomEase from "./CustomEase.min";
+
+// import CustomEase from '../vendors/CustomEase.min.js';
+// const CustomEase = require('../vendors/CustomEase.min.js');
 
 export default class Utility {
 
-    /**
-     *
-     * @param a {Number}
-     * @param b {Number}
-     * @param c {Number}
-     * @param d {Number}
-     * @return { * }
-     */
     static getCubicCurve(a, b, c, d) {
-        return CustomEase.create("custom", `M0,0 C${Number( a )},${Number( b )} ${Number( c )},${Number( d )} 1,1`);
+        // @ts-ignore
+        return CustomEase.create('custom', `M0,0 C${Number(a)},${Number(b)} ${Number(c)},${Number(d)} 1,1`);
     }
-
-    /**
-     * @param {String} hexCode
-     * @return {Array} RGB
-     */
+    
     static hexToRgb(hexCode) {
         return Color.hexToRgb(hexCode);
     }
 
-    /*
-     * @param {Number} R
-     * @param {Number} G
-     * @param {Number} B
-     * @return {String} hexCode
-     */
     static rgbToHex(R, G, B) {
         return Color.rgbToHex(R, G, B);
     }
 
-    /**
-     *
-     */
-    static noScroll(){
+    static noScroll() {
         // PC
         let scroll_event = 'onwheel' in document ? 'wheel' : 'onmousewheel' in document ? 'mousewheel' : 'DOMMouseScroll';
         // $(document).on(scroll_event,function(e){e.preventDefault();});
@@ -44,15 +26,22 @@ export default class Utility {
         // $(document).on('touchmove.noScroll', function(e) {e.preventDefault();});
     }
 
-    /**
-     *
-     */
-    static returnScroll(){
+    static returnScroll() {
         // PC
         let scroll_event = 'onwheel' in document ? 'wheel' : 'onmousewheel' in document ? 'mousewheel' : 'DOMMouseScroll';
         // $(document).off(scroll_event);
         // SP
         // $(document).off('.noScroll');
+    }
+
+    static getOffset(type, elm) {
+
+        let rect = elm.getBoundingClientRect();
+        let st = window.pageYOffset || document.documentElement.scrollTop;
+
+        if(type == 'top') return rect.top + st;
+        if(type == 'left') return rect.left;
+
     }
 
 }

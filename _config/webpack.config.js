@@ -172,7 +172,7 @@ module.exports = env => {
             main: './ts/index.ts'
         },
         output: {
-            path: CONFIG.ASSETS + '/js',
+            path: CONFIG.ASSETS + '/js/',
             filename: '[name].bundle.js'
         },
         module: {
@@ -202,37 +202,82 @@ module.exports = env => {
         }
     }
 
+    const tsStageBuildConfig = {
+        context: CONFIG.SRC,
+        entry: {
+            stage: './ts/three/Stage.ts'
+        },
+        output: {
+            path: CONFIG.ASSETS + '/js/',
+            filename: 'stage.js'
+        },
+        module: {
+            rules: [
+                {
+                    test: /\.ts$/,
+                    use: 'ts-loader'
+                }, 
+                // {
+                //     test: /\.(glsl|vs|fs|vert|frag)$/,
+                //     include: CONFIG.SRC + '/js',
+                //     use: [{
+                //         loader: 'shader-loader',
+                //     }]
+                // },
+                {
+                    test: /\.(glsl|vs|fs|vert|frag)$/,
+                    include: CONFIG.SRC + '/ts',
+                    use: [
+                        'raw-loader',{
+                            loader: 'glslify-loader',
+                            // options: {
+                            //     transform: [
+                            //         ['glslify-hex', { 'option-1': true, 'option-2': 42 }]
+                            //     ]
+                            // }
+                        }
+                    ]
+                },
+            ]
+        },
+        resolve: {
+            extensions: [
+                '.ts', '.js', '.glsl', '.vs', '.fs', '.vert', '.frag'
+            ],
+        }
+    }
+
     // js
     // --------------------------------------------------
 
-    const jsBuildConfig = {
-        context: CONFIG.SRC,
-        entry: {
-            main: './js/index.js'
-        },
-        output: {
-            path: CONFIG.ASSETS + '/js',
-            filename: '[name].bundle.js'
-        },
-        resolve: {
-            alias: {
-                'js': path.join(__dirname, '../src/js/'),
-                'TweenLite': 'gsap/src/uncompressed/TweenLite',
-            }
-        },
-        optimization: {
-            splitChunks: {
-                cacheGroups: {
-                    vendor: {
-                        test: /node_modules/,
-                        name: 'vendor',
-                        chunks: 'initial',
-                        enforce: true
-                    }
-                }
-            }
-        },
-    }
+    // const jsBuildConfig = {
+    //     context: CONFIG.SRC,
+    //     entry: {
+    //         main: './js/index.js'
+    //     },
+    //     output: {
+    //         path: CONFIG.ASSETS + '/js',
+    //         filename: '[name].bundle.js'
+    //     },
+    //     resolve: {
+    //         alias: {
+    //             'js': path.join(__dirname, '../src/js/'),
+    //             'TweenLite': 'gsap/src/uncompressed/TweenLite',
+    //         }
+    //     },
+    //     optimization: {
+    //         splitChunks: {
+    //             cacheGroups: {
+    //                 vendor: {
+    //                     test: /node_modules/,
+    //                     name: 'vendor',
+    //                     chunks: 'initial',
+    //                     enforce: true
+    //                 }
+    //             }
+    //         }
+    //     },
+    // }
 
     // const jsBuildConfig = {
     //     context: CONFIG.SRC,
@@ -391,6 +436,6 @@ module.exports = env => {
     //     ],
     //     // devtool: PRODUCTION ? '' : 'source-map'
     // };
-    
-    return [pugBuildConfig, sassBuildConfig, tsBuildConfig, /*jsBuildConfig,*/ /*stageBuildConfig*/ ];
+
+    return [pugBuildConfig, sassBuildConfig, tsBuildConfig, /*jsBuildConfig,*/ /*stageBuildConfig,*/ tsStageBuildConfig ];
 };

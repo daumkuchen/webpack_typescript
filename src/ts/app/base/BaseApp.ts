@@ -1,7 +1,7 @@
-
-// import page from 'page';
-import Schedule from '../../utility/Schedule';
+import VcRouter from '../routers/VcRouter';
 import BaseControllerManager from './BaseControllerManager';
+
+import Schedule from '../../utility/Schedule';
 
 export default class BaseApp {
     
@@ -34,13 +34,10 @@ export default class BaseApp {
         this.useAjax = useAjax;
 
     }
-
-    /**
-     * @public
-     */
+    
     public boot() {
 
-        // _safeBoot
+        // old safeBoot
         const schedule = new Schedule();
 
         schedule.add(this._fx['none --> none'](null, null, null, null, this.controllerManager));
@@ -48,6 +45,34 @@ export default class BaseApp {
         schedule.done(() => {
             // this.controllerManager.use('current').viewDidAppear();
         });
+
+    }
+
+    public baseBoot() {
+
+        // not use Router
+
+        let viewController = new BaseControllerManager(VcRouter).getController(document.querySelector('.page-content').getAttribute('id'));
+        
+        window.addEventListener('DOMContentLoaded', () => {
+
+            viewController.viewWillLoad();
+
+            setTimeout( () => {
+                viewController.viewDidLoad();
+            }, 500 );
+
+        }, false );
+
+        window.addEventListener('load', () => {
+
+            viewController.viewWillAppear();
+
+            setTimeout( () => {
+                viewController.viewDidAppear();
+            }, 500 );
+
+        }, false );
 
     }
 
